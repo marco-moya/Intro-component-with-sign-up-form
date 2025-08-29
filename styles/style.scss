@@ -1,0 +1,240 @@
+$Red-400: hsl(0, 100%, 74%);
+$Green-400: hsl(154, 59%, 51%);
+$Purple-700: hsl(248, 32%, 49%);
+$Gray-900: hsl(249, 10%, 26%);
+$Purple-350: hsl(246, 25%, 77%);
+$text-color: #fff;
+$font-Poppins: "Poppins", sans-serif;
+
+@mixin content-direction($direction: column) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin content-center($justify: center, $align: center) {
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin respond-to($breakpoint) {
+  @if ($breakpoint == desktop) {
+    @media (min-width: 64rem) { @content }
+  }
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.intro-signup {
+  width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: $font-Poppins;
+  @include content-direction();
+  @include content-center();
+  background: $Red-400;
+  background-image: url("../images/bg-intro-mobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include respond-to(desktop) {
+    background-image: url("../images/bg-intro-desktop.png");
+  }
+  
+  &__main {
+    width: 100%;
+    padding: 5.5rem 1rem;
+    @include content-direction();
+    @include content-center();
+    gap: 4rem;
+    @include respond-to(desktop) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas: "intro sigup";
+      gap: 0;
+    }
+  }
+  
+  &__info {
+    width: 100%;
+    max-width: 550px;
+    @include content-direction();
+    @include content-center();
+    gap: 1rem;
+    @include respond-to(desktop) {
+      grid-area: intro;
+      justify-self: end;
+      gap: 1.5rem;
+    }
+  }
+
+  &__title {
+    color: $text-color;
+    text-align: center;
+    font-size: 1.7rem;
+    @include respond-to(desktop) {
+      font-size: 3rem;
+      text-align: start;
+      line-height: 3rem;
+    }
+  }
+
+  &__description {
+    padding: 0 0.5rem;
+    color: $text-color;
+    text-align: center;
+    font-weight: 500;
+    @include respond-to(desktop) {
+      padding: 0;
+      text-align: start;
+    }
+  }
+}
+
+.signup {
+  width: 100%;
+  max-width: 550px;
+  @include content-direction();
+  @include content-center();
+  gap: 1.5rem;
+  @include respond-to(desktop) {
+    grid-area: sigup;
+  }
+
+  &__offer {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: $Purple-700;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  &__offer-text {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 500;
+    color: $Purple-350;
+    @include respond-to(desktop) {
+      width: 100%;
+    }
+  }
+
+  &__offer-text--highlight {
+    color: $text-color;
+    font-weight: 600;
+  }
+  
+  &__form {
+    width: 100%;
+    padding: 1.4rem;
+    border-radius: 10px;
+    background-color: $text-color;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+    @include content-direction();
+    @include content-center();
+    gap: 1rem;
+    @include respond-to(desktop) {
+      padding: 2.2rem;
+    }
+  }
+
+  &__fields {
+    width: 100%;
+    @include content-direction();
+    @include respond-to(desktop) {
+    }
+  }
+
+  &__group:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  &__input-group {
+    width: 100%;
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid $Purple-350;
+    outline: none;
+    @include respond-to(desktop) {
+      padding: 1.2rem 1.8rem;
+    }
+  }
+
+  &__input:focus {
+    border: 2px solid $Purple-700;
+  }
+
+  &__input::placeholder {
+    font-family: $font-Poppins;
+    font-weight: 600;
+  }
+
+  &__input-error {
+    border: 3px solid $Red-400;
+    color: $Red-400;
+    font-weight: 600;
+  }
+
+  &__icon-error {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    display: none;
+  }
+
+  &__message-error {
+    margin-top: 0.5rem;
+    color: $Red-400;
+    text-align: end;
+    font-size: 14px;
+    display: none;
+  }
+
+  &__button {
+    width: 100%;
+    padding: 1.2rem;
+    color: $text-color;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: $Green-400;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 0 darken($Green-400, 10%);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &__terms {
+    padding: 0 1rem;
+    font-size: 12px;
+    color: $Purple-350;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.5rem;
+  }
+
+  &__terms--highlight {
+    color: $Red-400;
+    font-weight: 600;
+  }
+}
+
+.active {
+  display: block;
+}

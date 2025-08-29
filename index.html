@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Intro component with sign up form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body class="intro-signup">
+  <main class="intro-signup__main">
+    <section class="intro-signup__info">
+      <h1 class="intro-signup__title">Learn to code by watching others</h1>
+      <p class="intro-signup__description">
+        See how experienced developers solve problems in real-time. Watching scripted tutorials is great, but understanding how developers think is invaluable.
+      </p>
+    </section>
+    <section class="signup">
+      <div class="signup__offer">
+        <p class="signup__offer-text"><strong class="signup__offer-text--highlight">Try it free 7 days</strong> then $20/mo. thereafter</p>
+      </div>
+      <form class="signup__form" id="form">
+        <section class="signup__fields">
+          <div class="signup__group" id="group_firstName">
+            <div class="signup__input-group">
+              <input class="signup__input" type="text" name="firstName" placeholder="First Name">
+              <img src="./images/icon-error.svg" alt="icon error" class="signup__icon-error">
+            </div>
+            <p class="signup__message-error"><em>First Name cannot be empty</em></p>
+          </div>
+          <div class="signup__group" id="group_lastName">
+            <div class="signup__input-group">
+              <input class="signup__input" type="text" name="lastName" placeholder="Last Name">
+              <img src="./images/icon-error.svg" alt="icon error" class="signup__icon-error">
+            </div>
+            <p class="signup__message-error"><em>Last Name cannot be empty</em></p>
+          </div>
+          <div class="signup__group" id="group_email">
+            <div class="signup__input-group">
+              <input class="signup__input" type="email" name="email" placeholder="Email Address">
+              <img src="./images/icon-error.svg" alt="icon error" class="signup__icon-error">
+            </div>
+            <p class="signup__message-error"><em>Looks like this is not an email</em></p>
+          </div>
+          <div class="signup__group" id="group_password">
+            <div class="signup__input-group">
+              <input class="signup__input" type="password" name="password" placeholder="Password">
+              <img src="./images/icon-error.svg" alt="icon error" class="signup__icon-error">
+            </div>
+            <p class="signup__message-error"><em>Password cannot be empty</em></p>
+          </div>
+        </section>
+        <button class="signup__button" type="submit">claim your free trial</button>
+        <p class="signup__terms">By clicking the button, you are agreeing to our <span class="signup__terms--highlight">Terms and Services</span></p>
+      </form>
+    </section>
+  </main>
+  <script src="./main.js"></script>
+</body>
+</html>
