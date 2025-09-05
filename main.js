@@ -3,11 +3,17 @@ const d = document,
   $inputs = d.querySelectorAll("#form input");
 
 const expression = {
-	firstName: /^.+$/,
-	lastName: /^.+$/,
+	firstName: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+	lastName: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	password: /^.+$/,
 }
+
+const messages = {
+  firstName: "Looks like this is not an name",
+  lastName: "Looks like this is not a last name",
+  email: "Looks like this is not an email"
+};
 
 const fields = {
   firstName: false,
@@ -16,19 +22,34 @@ const fields = {
   password: false
 }
 
-const validateField = (expression, input, field) => {
-  if (expression.test(input.value)) {
-    d.querySelector(`#group_${field} p`).classList.remove("active");
-    d.querySelector(`#group_${field} img`).classList.remove("active");
-    d.querySelector(`#group_${field} input`).classList.remove("signup__input-error");
-    console.log("Campo correcto")
-    fields[field] = true;
+const addErrorStyles = (input) => {
+  input.classList.add("signup__input-error");
+  input.nextElementSibling.classList.add("active");
+}
+
+const removeErrorStyles = (input) => {
+  input.classList.remove("signup__input-error");
+  input.nextElementSibling.classList.remove("active");
+}
+
+const clearErrors = () => {
+  const errorMessages = d.querySelectorAll("#form .error-message");
+  errorMessages.forEach(msg => msg.innerText = "");
+};
+
+const validateField = (fieldRegex, inputElement, field) => {
+  if (inputElement.value == "") {
+    d.querySelector(`#group_${field} .error-message`).innerText = `${inputElement.placeholder} cannot be empty`;
+    addErrorStyles(inputElement);
+    inputElement.classList.add("page__input-error");
+  } else if (!fieldRegex.test(inputElement.value)) {
+    d.querySelector(`#group_${field} .error-message`).innerText = messages[field];
+    addErrorStyles(inputElement);
   } else {
-    d.querySelector(`#group_${field} p`).classList.add("active");
-    d.querySelector(`#group_${field} img`).classList.add("active");
-    d.querySelector(`#group_${field} input`).classList.add("signup__input-error");
-    console.log("Campo incorrecto")
-    fields[field] = false;
+    inputElement.classList.remove("page__input-error");
+    removeErrorStyles(inputElement);
+    clearErrors();
+    fields[field] = true;
   }
 }
 
@@ -40,10 +61,15 @@ $form.addEventListener("submit", e => {
     validateField(expression[name], input, name);
   });
 
-
   if ( Object.values(fields).includes(false) ) {
-    console.log("Formulario no completado", fields);
+  console.log("Formulario no completado");
   } else {
-    console.log("Formulario completado correctamente", fields);
+    console.log("Formulario completado correctamente");
+     //  Resetear formulario
+    $form.reset();
+     //  Resetear el estado de validación
+    Object.keys(fields).forEach(key => {
+      fields[key] = false;
+    });
   }
 })
